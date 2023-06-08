@@ -3,14 +3,25 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TypeButton from "../TypeButton/TypeButton";
 import { typeColors } from "../../constants/constants";
-import icons from "../../constants/icons";
-const CharacterCard = ({ id, name, image, type }) => {
+import pokeBall from "../../assets/icons/pokeball.png";
+const CharacterCard = ({
+  id,
+  name,
+  image,
+  type,
+  handleAddToFavorites,
+  handleRemoveFromFavorites,
+  favoritePokemons,
+}) => {
+  const alreadyAdded = favoritePokemons.some(
+    (favoritePokemonId) => favoritePokemonId === id
+  );
   const bgColor = typeColors[type] || "lightgray";
   return (
     <Box
       sx={{
         width: "300px",
-        height: "225px",
+        height: "240px",
         border: `3px solid ${bgColor}`,
         borderRadius: "30px",
         position: "relative",
@@ -37,14 +48,14 @@ const CharacterCard = ({ id, name, image, type }) => {
         >
           <Typography
             variant="h2"
-            fontSize="32px"
+            fontSize="40px"
             letterSpacing="1px"
             fontWeight="bold"
             textTransform="capitalize"
           >
             {name}
           </Typography>
-          <Typography variant="h5" fontSize="26px">
+          <Typography variant="h5" fontSize="30px">
             #{id}
           </Typography>
         </Stack>
@@ -58,7 +69,7 @@ const CharacterCard = ({ id, name, image, type }) => {
           <TypeButton type={type} width="100px" />
           <Box position="relative">
             <img
-              src={icons.pokeball}
+              src={pokeBall}
               style={{
                 width: "170px",
                 height: "170px",
@@ -83,9 +94,27 @@ const CharacterCard = ({ id, name, image, type }) => {
           </Box>
         </Stack>
       </Link>
-      <Button variant="outlined" sx={{ color: "white", border: bgColor }}>
-        add to favorites
-      </Button>
+      {alreadyAdded ? (
+        <Button
+          variant="outlined"
+          sx={{ color: "white", border: bgColor, outline: "none" }}
+          onClick={() => {
+            handleRemoveFromFavorites(name, id);
+          }}
+        >
+          Remove from Favorites
+        </Button>
+      ) : (
+        <Button
+          variant="outlined"
+          sx={{ color: "white", border: bgColor, outline: "none" }}
+          onClick={() => {
+            handleAddToFavorites(name, id);
+          }}
+        >
+          add to favorites
+        </Button>
+      )}
     </Box>
   );
 };

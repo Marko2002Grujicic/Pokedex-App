@@ -4,14 +4,19 @@ import { Link } from "react-router-dom";
 import logo from "../assets/icons/pokedex.png";
 const Navbar = () => {
   return (
-    <Box bgcolor="#EF5350" padding="10px">
+    <Box
+      bgcolor="#EF5350"
+      padding="10px"
+      display="flex"
+      justifyContent="space-flex-start"
+    >
       <Link
         to={"/"}
         style={{
           textDecoration: "none",
           width: "fit-content",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           display: "flex",
           gap: "20px",
         }}

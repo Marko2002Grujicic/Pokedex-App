@@ -1,10 +1,9 @@
 import { Stack, Typography } from "@mui/material";
 import React from "react";
-import { typeColors, typeIcons } from "../../constants/constants";
+import { buttonColors } from "../../constants/constants";
 
 const TypeButton = ({ type, width }) => {
-  const bgColor = typeColors[type] || "lightgray";
-  const typeIcon = typeIcons[type] || null;
+  const bgColor = buttonColors[type] || "lightgray";
   return (
     <Stack
       width={width}
@@ -15,15 +14,8 @@ const TypeButton = ({ type, width }) => {
       alignItems="center"
       justifyContent="center"
     >
-      {typeIcon && (
-        <img
-          src={typeIcon}
-          alt={typeIcon}
-          style={{ width: "40px", height: "40px" }}
-        />
-      )}
       <Typography
-        variant="h4"
+        variant="h5"
         textTransform="capitalize"
         color="white"
         textAlign={"center"}
