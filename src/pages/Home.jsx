@@ -41,7 +41,9 @@ const Home = ({
   };
   useEffect(() => {
     setLoading(true);
-    getAllPokemons(currentPageUrl);
+    getAllPokemons(currentPageUrl).catch((error) => {
+      console.log(`There has been a following error: ${error}`);
+    });
     setLoading(false);
   }, [currentPageUrl]);
 
@@ -75,6 +77,7 @@ const Home = ({
         setSearchedPokemon={setSearchedPokemon}
         onSort={onSort}
       />
+
       <Characters
         pokemons={searchedPokemon ? [searchedPokemon] : pokemons}
         pageNum={pageNum}

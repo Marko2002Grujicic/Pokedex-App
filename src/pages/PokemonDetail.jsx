@@ -108,8 +108,8 @@ const PokemonDetail = ({
             </Box>
             <Box>
               <Stack pt={2} gap="15px" direction="row">
-                {pokemonDetails?.types.map((item) => (
-                  <TypeButton type={item.type.name} width="150px" />
+                {pokemonDetails?.types.map((item, index) => (
+                  <TypeButton type={item.type.name} width="150px" key={index} />
                 ))}
               </Stack>
             </Box>
@@ -177,18 +177,24 @@ const PokemonDetail = ({
               >
                 <Typography
                   variant="h6"
-                  borderBottom={active === "about" && "2px solid blue"}
+                  borderBottom={active === "about" && `2px solid ${bgColor}`}
                   onClick={() => {
                     setActive("about");
+                  }}
+                  sx={{
+                    cursor: "pointer",
                   }}
                 >
                   About
                 </Typography>
                 <Typography
                   variant="h6"
-                  borderBottom={active === "stats" && "2px solid blue"}
+                  borderBottom={active === "stats" && `2px solid ${bgColor}`}
                   onClick={() => {
                     setActive("stats");
+                  }}
+                  sx={{
+                    cursor: "pointer",
                   }}
                 >
                   Base Stats
@@ -223,11 +229,17 @@ const PokemonDetail = ({
                         {pokemonDetails?.weight}g
                       </Typography>
                       <Box display="flex">
-                        {pokemonDetails?.abilities.map((abilitiesArray) => (
-                          <Typography variant="h6" textTransform="capitalize">
-                            {abilitiesArray.ability.name}&nbsp;
-                          </Typography>
-                        ))}
+                        {pokemonDetails?.abilities.map(
+                          (abilitiesArray, index) => (
+                            <Typography
+                              variant="h6"
+                              textTransform="capitalize"
+                              key={index}
+                            >
+                              {abilitiesArray.ability.name}&nbsp;
+                            </Typography>
+                          )
+                        )}
                       </Box>
                       <Box display="flex">
                         {pokemonDetails?.moves.slice(0, 2).map((movesArray) => (

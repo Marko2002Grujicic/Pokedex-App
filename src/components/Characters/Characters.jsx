@@ -17,7 +17,6 @@ const Characters = ({
   currentPageUrl,
   setCurrentPageUrl,
 }) => {
-  console.log(pokemons);
   const nextPageHandler = () => {
     setPageNum((prevNumber) => prevNumber + 1);
     setPreviousPageUrl(currentPageUrl);
