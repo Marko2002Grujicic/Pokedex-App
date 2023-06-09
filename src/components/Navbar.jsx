@@ -28,7 +28,7 @@ const Navbar = () => {
           color="white"
           fontWeight="bold"
         >
-          Poke API
+          Pokedex
         </Typography>
       </Link>
     </Box>

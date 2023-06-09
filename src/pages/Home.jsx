@@ -45,7 +45,7 @@ const Home = ({
       console.log(`There has been a following error: ${error}`);
     });
     setLoading(false);
-  }, [currentPageUrl]);
+  }, [currentPageUrl, setLoading]);
 
   const onSort = (sortType) => {
     let sortedPokemons = [...pokemons];

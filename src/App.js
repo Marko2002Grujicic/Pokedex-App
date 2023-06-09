@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import PokemonDetail from "./pages/PokemonDetail";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import { useEffect, useState } from "react";
 
 function App() {

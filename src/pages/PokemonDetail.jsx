@@ -31,7 +31,7 @@ const PokemonDetail = ({
       setPokemonDetails(data);
       setLoading(false);
     });
-  }, [url]);
+  }, [url, setLoading]);
 
   const alreadyAdded =
     pokemonDetails &&

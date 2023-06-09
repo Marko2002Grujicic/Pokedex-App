@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+<!-- PROJECT LOGO -->
+<p align="center">
+
+  <h1 align="center">Pokedex</h1>
+
+  <h3 align="center">
+   Browse your favorite Pokemons!
+  </h3>
+ <br />
+ 
+ ### Click here for live demo   <a href="https://pokedexapp-clone.netlify.app">Pokedex</a>
+
+</p>
+
+<!-- ABOUT THE PROJECT -->
+
+## About The Project:
+
+### Homepage:
+
+![Preview](./homePagePokemon.png)
+On the homepage the user can see top pokemons, search them by name or sort them A-Z, Z-A or default (by their ID)
+
+### Character Page:
+
+![Preview](./SinglePokemonPage.png)
+On the Pokemon detail page the user can see detailed information about the Pokemon
+
+#### The common funtionalities are:
+
+-View Top Pokemons: The homepage displays a list of top Pokemons. These Pokemons are fetched from the Pokemon API and are shown as cards with their names and images.
+
+-Search by Name: The app provides a search feature where users can search for Pokemons by their name. And even sort them by name (A-Z, Z-A) or Default (by their ID, 1-1000).
+
+-Detailed Pokemon Information: When a user clicks on a Pokemon card, they are taken to a detailed view of that Pokemon. This view displays comprehensive information about the Pokemon, including its stats, abilities, and other details.
+
+-Add to Favorites: Users have the ability to add Pokemons to their favorites list. They can click on a button or an icon to add a Pokemon to their favorites collection.
+
+-Remove from Favorites: Users can also remove Pokemons from their favorites list. By clicking on a button or an icon, they can remove a Pokemon from their favorites collection, customizing their list based on their preferences.
+
+-Pagination: The app supports pagination to allow users to navigate through multiple pages of Pokemons. The pagination controls, such as "Next" and "Previous" buttons, enable users to browse more Pokemons beyond the initial page.
+
+-Loading State: A loading state is implemented to provide visual feedback to users while fetching data from the Pokemon API. During the loading state, a loading indicator is displayed to inform the user that the app is retrieving data.
+
+-Error Handling: In case of any errors during the data fetching process or API requests, the app gracefully handles the errors. An error message is displayed to inform the user about the issue and provide appropriate instructions.
+
+I'm using [poke api](https://pokeapi.co) to get pokemons.
+
+##### Credit: poke api
+
+### Built With
+
+- #### ReactJS
+- #### Material UI
+- #### poke api
+
+### Key concepts:
+
+- #### Material UI
+- #### Fetching data from an API
+- #### Handling events
+- #### String manipulation
+- #### Filtering data
+- #### JavaScript Object Oriented Programming
+- #### React Hooks
+- #### React components
+- #### React state and props
+- #### Routing and Navigation
+- #### Conditional Rendering
+- #### Component Styling
+- #### State Management
+- #### Responsive Design
+
+<!-- GETTING STARTED -->
+
+# Getting Started
+
+## After cloning github repository
+
+### To install all dependency necessary:
+
+### `npm i`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
-In the project directory, you can run:
+### To run project:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### To build project:
 
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
