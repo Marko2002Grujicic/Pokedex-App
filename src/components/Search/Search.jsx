@@ -12,6 +12,7 @@ const Search = ({
   const handleSearch = async (pokemonName) => {
     if (pokemonName === "") {
       getAllPokemons("https://pokeapi.co/api/v2/pokemon?limit=24");
+      setError(false);
       return;
     }
     setLoading(true);
@@ -24,6 +25,7 @@ const Search = ({
       }
       const data = await res.json();
       setSearchedPokemon(data);
+      setError(false);
     } catch (error) {
       console.log(`Error: ${error}`);
       setError(true);
