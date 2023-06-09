@@ -4,7 +4,7 @@ import pokeBall from "../../assets/icons/pokeballColored.png";
 const NotFound = () => {
   return (
     <Box
-      height="60vh"
+      height="69vh"
       display="flex"
       alignItems="center"
       justifyContent="center"

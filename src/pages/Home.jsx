@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Characters from "../components/Characters/Characters";
 import Search from "../components/Search/Search";
 import NotFound from "../components/NotFound/NotFound";
@@ -21,39 +21,49 @@ const Home = ({
   const [searchedPokemon, setSearchedPokemon] = useState(null);
   const [error, setError] = useState(false);
 
-  const getAllPokemons = async (url) => {
-    setLoading(true);
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      setNextPageUrl(data.next);
-      setPreviousPageUrl(data.previous);
+  const getAllPokemons = useCallback(
+    async (url) => {
+      setLoading(true);
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        setNextPageUrl(data.next);
+        setPreviousPageUrl(data.previous);
 
-      const createPokemonObject = async (result) => {
-        const pokemons = await Promise.all(
-          result.map(async (pokemon) => {
-            const res = await fetch(
-              `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
-            );
-            const data = await res.json();
-            return data;
-          })
-        );
-        setPokemons(pokemons);
-      };
-      createPokemonObject(data.results);
+        const createPokemonObject = async (result) => {
+          const pokemons = await Promise.all(
+            result.map(async (pokemon) => {
+              const res = await fetch(
+                `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+              );
+              const data = await res.json();
+              return data;
+            })
+          );
+          setPokemons(pokemons);
+        };
+        createPokemonObject(data.results);
 
-      setError(false);
-    } catch (error) {
-      console.log(`There has been a following error: ${error}`);
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
+        setError(false);
+      } catch (error) {
+        console.log(`There has been a following error: ${error}`);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [setLoading]
+  );
   useEffect(() => {
-    getAllPokemons(currentPageUrl);
-  }, [currentPageUrl]);
+    setLoading(true);
+    getAllPokemons(currentPageUrl)
+      .then(() => setLoading(false))
+      .catch((error) => {
+        console.log(`There has been a following error: ${error}`);
+        setError(true);
+        setLoading(false);
+      });
+  }, [currentPageUrl, getAllPokemons, setLoading, setError]);
 
   const onSort = (sortType) => {
     let sortedPokemons = [...pokemons];
@@ -87,7 +97,7 @@ const Home = ({
         getAllPokemons={getAllPokemons}
         setError={setError}
       />
-      {error || pokemons.length === 0 ? (
+      {error ? (
         <NotFound />
       ) : (
         <Characters
