@@ -208,24 +208,50 @@ const PokemonDetail = ({
                     alignItems="center"
                   >
                     <Stack direction="column" gap="15px">
-                      <Typography variant="h6" fontWeight={400} color={"gray"}>
+                      <Typography
+                        variant="h6"
+                        fontWeight={400}
+                        color={"gray"}
+                        fontSize={{ xs: "16px", sm: "18px" }}
+                      >
                         Height
                       </Typography>
-                      <Typography variant="h6" fontWeight={400} color={"gray"}>
+                      <Typography
+                        variant="h6"
+                        fontWeight={400}
+                        color={"gray"}
+                        fontSize={{ xs: "16px", sm: "18px" }}
+                      >
                         Weight
                       </Typography>
-                      <Typography variant="h6" fontWeight={400} color={"gray"}>
+                      <Typography
+                        variant="h6"
+                        fontWeight={400}
+                        color={"gray"}
+                        fontSize={{ xs: "16px", sm: "18px" }}
+                      >
                         Abilities
                       </Typography>
-                      <Typography variant="h6" fontWeight={400} color={"gray"}>
+                      <Typography
+                        variant="h6"
+                        fontWeight={400}
+                        color={"gray"}
+                        fontSize={{ xs: "16px", sm: "18px" }}
+                      >
                         Moves
                       </Typography>
                     </Stack>
                     <Stack direction="column" gap="15px">
-                      <Typography variant="h6">
+                      <Typography
+                        variant="h6"
+                        fontSize={{ xs: "16px", sm: "18px" }}
+                      >
                         {pokemonDetails?.height}cm
                       </Typography>
-                      <Typography variant="h6">
+                      <Typography
+                        variant="h6"
+                        fontSize={{ xs: "16px", sm: "18px" }}
+                      >
                         {pokemonDetails?.weight}g
                       </Typography>
                       <Box display="flex">
@@ -235,6 +261,7 @@ const PokemonDetail = ({
                               variant="h6"
                               textTransform="capitalize"
                               key={index}
+                              fontSize={{ xs: "16px", sm: "18px" }}
                             >
                               {abilitiesArray.ability.name}&nbsp;
                             </Typography>
@@ -243,7 +270,11 @@ const PokemonDetail = ({
                       </Box>
                       <Box display="flex">
                         {pokemonDetails?.moves.slice(0, 2).map((movesArray) => (
-                          <Typography variant="h6" textTransform="capitalize">
+                          <Typography
+                            variant="h6"
+                            textTransform="capitalize"
+                            fontSize={{ xs: "16px", sm: "18px" }}
+                          >
                             {movesArray.move.name}&nbsp;
                           </Typography>
                         ))}

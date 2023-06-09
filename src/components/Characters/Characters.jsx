@@ -29,12 +29,9 @@ const Characters = ({
     setCurrentPageUrl(previousPageUrl);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
+      {!loading && (
         <Box p="20px">
           <Stack
             direction="row"
@@ -63,6 +60,7 @@ const Characters = ({
           />
         </Box>
       )}
+      {loading && <Loader />}
     </>
   );
 };

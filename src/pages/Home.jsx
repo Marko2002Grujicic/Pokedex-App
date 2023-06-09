@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Characters from "../components/Characters/Characters";
 import Search from "../components/Search/Search";
+import NotFound from "../components/NotFound/NotFound";
 
 const Home = ({
   handleAddToFavorites,
@@ -18,34 +19,41 @@ const Home = ({
     "https://pokeapi.co/api/v2/pokemon?limit=24"
   );
   const [searchedPokemon, setSearchedPokemon] = useState(null);
+  const [error, setError] = useState(false);
 
   const getAllPokemons = async (url) => {
-    const res = await fetch(url);
-    const data = await res.json();
-    setNextPageUrl(data.next);
-    setPreviousPageUrl(data.previous);
+    setLoading(true);
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      setNextPageUrl(data.next);
+      setPreviousPageUrl(data.previous);
 
-    const createPokemonObject = async (result) => {
-      const pokemons = await Promise.all(
-        result.map(async (pokemon) => {
-          const res = await fetch(
-            `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
-          );
-          const data = await res.json();
-          return data;
-        })
-      );
-      setPokemons(pokemons);
-    };
-    createPokemonObject(data.results);
+      const createPokemonObject = async (result) => {
+        const pokemons = await Promise.all(
+          result.map(async (pokemon) => {
+            const res = await fetch(
+              `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+            );
+            const data = await res.json();
+            return data;
+          })
+        );
+        setPokemons(pokemons);
+      };
+      createPokemonObject(data.results);
+
+      setError(false);
+    } catch (error) {
+      console.log(`There has been a following error: ${error}`);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
   useEffect(() => {
-    setLoading(true);
-    getAllPokemons(currentPageUrl).catch((error) => {
-      console.log(`There has been a following error: ${error}`);
-    });
-    setLoading(false);
-  }, [currentPageUrl, setLoading]);
+    getAllPokemons(currentPageUrl);
+  }, [currentPageUrl]);
 
   const onSort = (sortType) => {
     let sortedPokemons = [...pokemons];
@@ -76,24 +84,29 @@ const Home = ({
         setLoading={setLoading}
         setSearchedPokemon={setSearchedPokemon}
         onSort={onSort}
+        getAllPokemons={getAllPokemons}
+        setError={setError}
       />
-
-      <Characters
-        pokemons={searchedPokemon ? [searchedPokemon] : pokemons}
-        pageNum={pageNum}
-        setPageNum={setPageNum}
-        nextPageUrl={nextPageUrl}
-        previousPageUrl={previousPageUrl}
-        setPreviousPageUrl={setPreviousPageUrl}
-        setNextPageUrl={setNextPageUrl}
-        currentPageUrl={currentPageUrl}
-        setCurrentPageUrl={setCurrentPageUrl}
-        handleAddToFavorites={handleAddToFavorites}
-        handleRemoveFromFavorites={handleRemoveFromFavorites}
-        loading={loading}
-        setLoading={setLoading}
-        favoritePokemons={favoritePokemons}
-      />
+      {error || pokemons.length === 0 ? (
+        <NotFound />
+      ) : (
+        <Characters
+          pokemons={searchedPokemon ? [searchedPokemon] : pokemons}
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+          nextPageUrl={nextPageUrl}
+          previousPageUrl={previousPageUrl}
+          setPreviousPageUrl={setPreviousPageUrl}
+          setNextPageUrl={setNextPageUrl}
+          currentPageUrl={currentPageUrl}
+          setCurrentPageUrl={setCurrentPageUrl}
+          handleAddToFavorites={handleAddToFavorites}
+          handleRemoveFromFavorites={handleRemoveFromFavorites}
+          loading={loading}
+          setLoading={setLoading}
+          favoritePokemons={favoritePokemons}
+        />
+      )}
     </Box>
   );
 };

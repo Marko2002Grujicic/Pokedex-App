@@ -1,18 +1,36 @@
+import { NewReleasesRounded } from "@mui/icons-material";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 
-const Search = ({ setLoading, setSearchedPokemon, onSort }) => {
+const Search = ({
+  setLoading,
+  setSearchedPokemon,
+  onSort,
+  getAllPokemons,
+  setError,
+}) => {
   const [pokemonName, setPokemonName] = useState("");
   const handleSearch = async (pokemonName) => {
-    if (pokemonName === "") return;
+    if (pokemonName === "") {
+      getAllPokemons("https://pokeapi.co/api/v2/pokemon?limit=24");
+      return;
+    }
     setLoading(true);
-    console.log(pokemonName);
-    const res = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`
-    );
-    const data = await res.json();
-    setSearchedPokemon(data);
-    setLoading(false);
+    try {
+      const res = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`
+      );
+      if (!res.ok) {
+        throw Error("Pokemon not found");
+      }
+      const data = await res.json();
+      setSearchedPokemon(data);
+    } catch (error) {
+      console.log(`Error: ${error}`);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
   const handleInputChange = (event) => {
     setPokemonName(event.target.value);
